@@ -1,0 +1,21 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "ymAEv1HWJtH1J4dUTebqbCPEst0=",
+			"origin": "github.com/GeoNet/weft/vendor/github.com/GeoNet/mtr/internal",
+			"path": "github.com/GeoNet/mtr/internal",
+			"revision": "4fd42f1a495aca91e4b0291b8b11a5193816e23f",
+			"revisionTime": "2016-05-01T06:10:11Z"
+		},
+		{
+			"checksumSHA1": "6XSbACIZ5QU8NHzXhvmazb4NAJE=",
+			"origin": "github.com/GeoNet/weft/vendor/github.com/GeoNet/mtr/mtrapp",
+			"path": "github.com/GeoNet/mtr/mtrapp",
+			"revision": "f2e6f97e06e8d174e52ab3c7d0516c7dbef0e272",
+			"revisionTime": "2016-05-01T06:10:11Z"
+		}
+	],
+	"rootPath": "github.com/GeoNet/weft"
+}
