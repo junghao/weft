@@ -74,7 +74,7 @@ func MakeHandlerPage(f RequestHandler) http.HandlerFunc {
 
 		// log errors and slow 200s
 		if res.Code != http.StatusOK {
-			log.Printf("status: %d serving %s", res.Code, r.RequestURI)
+			log.Printf("status: %d serving %s, error \"%s\"", res.Code, r.RequestURI, res.Msg)
 		} else if t.Taken() > 250 {
 			log.Printf("slow: took %d ms serving %s", t.Taken(), r.RequestURI)
 		}
@@ -115,7 +115,7 @@ func MakeHandlerAPI(f RequestHandler) http.HandlerFunc {
 
 		// log errors and slow 200s
 		if res.Code != http.StatusOK {
-			log.Printf("status: %d serving %s", res.Code, r.RequestURI)
+			log.Printf("status: %d serving %s, error \"%s\"", res.Code, r.RequestURI, res.Msg)
 		} else if t.Taken() > 250 {
 			log.Printf("slow: took %d ms serving %s", t.Taken(), r.RequestURI)
 		}
