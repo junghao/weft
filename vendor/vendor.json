@@ -3,18 +3,16 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "ymAEv1HWJtH1J4dUTebqbCPEst0=",
-			"origin": "github.com/GeoNet/weft/vendor/github.com/GeoNet/mtr/internal",
+			"checksumSHA1": "h1wz2IJ4cier6lWMxXMMqu17rYU=",
 			"path": "github.com/GeoNet/mtr/internal",
-			"revision": "4fd42f1a495aca91e4b0291b8b11a5193816e23f",
-			"revisionTime": "2016-05-01T06:10:11Z"
+			"revision": "64fd9bbd993e0809c2b4f6201f2fcd01cf630d06",
+			"revisionTime": "2016-05-18T04:21:58Z"
 		},
 		{
-			"checksumSHA1": "6XSbACIZ5QU8NHzXhvmazb4NAJE=",
-			"origin": "github.com/GeoNet/weft/vendor/github.com/GeoNet/mtr/mtrapp",
+			"checksumSHA1": "j9h2Qxtgol2ZABwCaypVKHv1u9I=",
 			"path": "github.com/GeoNet/mtr/mtrapp",
-			"revision": "f2e6f97e06e8d174e52ab3c7d0516c7dbef0e272",
-			"revisionTime": "2016-05-01T06:10:11Z"
+			"revision": "64fd9bbd993e0809c2b4f6201f2fcd01cf630d06",
+			"revisionTime": "2016-05-18T04:21:58Z"
 		}
 	],
 	"rootPath": "github.com/GeoNet/weft"
