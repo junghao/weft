@@ -1,0 +1,34 @@
+[[endpoint]]
+uri = "/tag/"
+
+  [[endpoint.get]]
+  function = "tagProto"
+  accept = "application/x-protobuf"
+
+  [[endpoint.get]]
+    function = "tagCsv"
+    accept = "text/csv"
+    default = true
+
+  [endpoint.put]
+  function = "tagPut"
+
+  [endpoint.delete]
+  function = "tagDelete"
+
+
+[[endpoint]]
+uri = "/tag"
+
+  [[endpoint.get]]
+  function = "tagsProto"
+  accept = "application/x-protobuf"
+
+
+[[endpoint]]
+uri = "/application/metric"
+
+  [endpoint.put]
+  function = "applicationMetrics"
+  required = ["applicationID", "typeID", "time"]
+  optional = ["resolution"]
