@@ -1,26 +1,88 @@
+title = "The API Title"
+repo = "url for the Git repo"
+
+[query.applicationID]
+description = "the application identifier - must be unique across all applications."
+type = "string"
+
+[query."field.typeID"]
+id = "typeID"
+description = "this is the field typeID. It is prefixed with field. to add namespace to differentiate it from application.typeID"
+type = "string"
+
+[query."application.typeID"]
+id = "typeID"
+description = "this is the application typeID. It is prefixed with application. to add namespace to differentiate it from field.typeID"
+type = "int"
+
+[query.time]
+description = "RFC3339 time"
+type = "string"
+
+[query.resolution]
+description = "resolution defn"
+type = "int"
+
+[query.tag]
+description = "a short tag"
+type = "string"
+
+
+[response.time]
+description = "RFC3339 time"
+type = "string"
+
 [[endpoint]]
 uri = "/tag/"
 
-  [[endpoint.get]]
-  function = "tagProto"
-  accept = "application/x-protobuf"
+  title = "Tag"
+  description = "tags can be added to metrics. A short sentence can include HTML"
+  discussion = """
+  <p>Add extra discussion with HTML markup \
+  as required.</p> \
+  <p>The discussion should have all required HTML for display \
+  e.g., paragraph tags.</p> \
+  """
 
-  [[endpoint.get]]
+  [[endpoint.request]]
+  method = "GET"
+  function = "tagProto"
+  parameter = "tag"
+  accept = "application/x-protobuf"
+  description = "returns a protobuf as defined in tag.proto"
+
+  [[endpoint.request]]
+  method = "GET"
+    parameter = "tag"
     function = "tagCsv"
     accept = "text/csv"
     default = true
 
-  [endpoint.put]
+  [[endpoint.request]]
+  method = "PUT"
+  parameter = "tag"
   function = "tagPut"
 
-  [endpoint.delete]
+  [[endpoint.request]]
+  method = "DELETE"
+  parameter = "tag"
   function = "tagDelete"
 
 
 [[endpoint]]
 uri = "/tag"
 
-  [[endpoint.get]]
+title = "Tags"
+  description = "A short sentence can include HTML"
+  discussion = """
+  <p>Add extra discussion with HTML markup \
+  as required.</p> \
+  <p>The discussion should have all required HTML for display \
+  e.g., paragraph tags.</p> \
+  """
+
+  [[endpoint.request]]
+    method = "GET"
   function = "tagsProto"
   accept = "application/x-protobuf"
 
@@ -28,7 +90,18 @@ uri = "/tag"
 [[endpoint]]
 uri = "/application/metric"
 
-  [endpoint.put]
-  function = "applicationMetrics"
-  required = ["applicationID", "typeID", "time"]
-  optional = ["resolution"]
+title = "Application Metrics"
+  description = "A short sentence can include HTML"
+  discussion = """
+  <p>Add extra discussion with HTML markup \
+  as required.</p> \
+  <p>The discussion should have all required HTML for display \
+  e.g., paragraph tags.</p> \
+  """
+
+[[endpoint.request]]
+method = "GET"
+function = "applicationMetrics"
+required = ["applicationID", "application.typeID", "time"]
+optional = ["resolution"]
+response = ["time"]

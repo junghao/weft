@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestLoadApi(t *testing.T) {
 	a := api{}
@@ -10,6 +12,10 @@ func TestLoadApi(t *testing.T) {
 	}
 
 	if err := a.writeHandlers("etc/handlers_auto.go"); err != nil {
+		t.Error(err)
+	}
+
+	if err := a.writeDocs("etc/index.html"); err != nil {
 		t.Error(err)
 	}
 }

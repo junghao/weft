@@ -1,3 +1,4 @@
 .idea/*
 weft.iml
 weftgenapi/etc/handlers_auto.go
+weftgenapi/etc/index.html
