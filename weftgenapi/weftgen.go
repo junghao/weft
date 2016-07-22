@@ -135,6 +135,9 @@ func handlerName(f string) string {
 		f = f + "s"
 	}
 
+	f = strings.Replace(f, ".", "_", -1)
+	f = strings.Replace(f, "-", "_", -1)
+
 	return strings.Replace(f, "/", "", -1) + "Handler"
 }
 
