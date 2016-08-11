@@ -28,6 +28,7 @@ type Result struct {
 	Ok   bool   // set true to indicate success
 	Code int    // http status code for writing back to the client e.g., http.StatusOK for success.
 	Msg  string // any error message for logging or to send to the client.
+	Redirect string // a URL to redirect to.  Use with Code = 3xx.
 }
 
 type RequestHandler func(r *http.Request, h http.Header, b *bytes.Buffer) *Result
@@ -42,6 +43,10 @@ func ServiceUnavailableError(err error) *Result {
 
 func BadRequest(message string) *Result {
 	return &Result{Ok: false, Code: http.StatusBadRequest, Msg: message}
+}
+
+func SeeOther(url string) *Result {
+	return &Result{Ok: true, Code: http.StatusSeeOther, Redirect: url}
 }
 
 /*

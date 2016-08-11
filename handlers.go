@@ -66,8 +66,18 @@ func MakeHandlerPage(f RequestHandler) http.HandlerFunc {
 		b.Reset()
 
 		res := f(r, w.Header(), b)
-		t.Stop()
-		WriteBytes(w, r, res, b, true)
+		t.Stop
+
+		switch res.Code {
+		case http.StatusSeeOther:
+			http.Redirect(w, r, res.Redirect, http.StatusSeeOther)
+
+			// change the Code to 200 for adding to the metrics.
+			// 303 is a successful post followed by a GET redirect.
+			res.Code = http.StatusOK
+		default:
+			WriteBytes(w, r, res, b, true)
+		}
 
 		t.Track(name(f) + "." + r.Method)
 		res.Count()
