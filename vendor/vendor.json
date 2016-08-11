@@ -3,16 +3,16 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "h1wz2IJ4cier6lWMxXMMqu17rYU=",
+			"checksumSHA1": "FcAtIa3dCgJBin+SrFiTOEU/bsA=",
 			"path": "github.com/GeoNet/mtr/internal",
-			"revision": "64fd9bbd993e0809c2b4f6201f2fcd01cf630d06",
-			"revisionTime": "2016-05-18T04:21:58Z"
+			"revision": "f63af4b93e2415b26382bcdb21ccce1d6e91d4bf",
+			"revisionTime": "2016-08-08T01:52:32Z"
 		},
 		{
-			"checksumSHA1": "j9h2Qxtgol2ZABwCaypVKHv1u9I=",
+			"checksumSHA1": "oyzYMUNOEaxnse/GPkadnPeMjTM=",
 			"path": "github.com/GeoNet/mtr/mtrapp",
-			"revision": "64fd9bbd993e0809c2b4f6201f2fcd01cf630d06",
-			"revisionTime": "2016-05-18T04:21:58Z"
+			"revision": "f63af4b93e2415b26382bcdb21ccce1d6e91d4bf",
+			"revisionTime": "2016-08-08T01:52:32Z"
 		},
 		{
 			"checksumSHA1": "+mS7dgSoJkuqQpmaetba7eLwm6I=",
