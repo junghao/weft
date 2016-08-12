@@ -66,7 +66,7 @@ func MakeHandlerPage(f RequestHandler) http.HandlerFunc {
 		b.Reset()
 
 		res := f(r, w.Header(), b)
-		t.Stop
+		t.Stop()
 
 		switch res.Code {
 		case http.StatusSeeOther:
