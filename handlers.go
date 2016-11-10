@@ -49,6 +49,7 @@ var surrogateControl = map[int]string{
 	http.StatusInternalServerError: "max-age=10",
 	http.StatusBadRequest:          "max-age=86400",
 	http.StatusMethodNotAllowed:    "max-age=86400",
+	http.StatusMovedPermanently:    "max-age=86400",
 }
 
 /*
@@ -69,6 +70,9 @@ func MakeHandlerPage(f RequestHandler) http.HandlerFunc {
 		t.Stop()
 
 		switch res.Code {
+		case http.StatusMovedPermanently:
+			w.Header().Set("Surrogate-Control", surrogateControl[http.StatusMovedPermanently])
+			http.Redirect(w, r, res.Redirect, http.StatusMovedPermanently)
 		case http.StatusSeeOther:
 			http.Redirect(w, r, res.Redirect, http.StatusSeeOther)
 
