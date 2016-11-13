@@ -25,9 +25,9 @@ var (
 )
 
 type Result struct {
-	Ok   bool   // set true to indicate success
-	Code int    // http status code for writing back to the client e.g., http.StatusOK for success.
-	Msg  string // any error message for logging or to send to the client.
+	Ok       bool   // set true to indicate success
+	Code     int    // http status code for writing back to the client e.g., http.StatusOK for success.
+	Msg      string // any error message for logging or to send to the client.
 	Redirect string // a URL to redirect to.  Use with Code = 3xx.
 }
 
@@ -107,7 +107,7 @@ func name(f RequestHandler) string {
 		n = fn.Name()
 		i := strings.LastIndex(n, ".")
 		if i > 0 && i+1 < len(n) {
-			n = n[i+1 : len(n)]
+			n = n[i+1:]
 		}
 	}
 	return n
