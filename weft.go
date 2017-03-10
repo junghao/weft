@@ -33,6 +33,8 @@ type Result struct {
 
 type RequestHandler func(r *http.Request, h http.Header, b *bytes.Buffer) *Result
 
+type RequestStreamHandler func(r *http.Request, h http.Header, w http.ResponseWriter) *Result
+
 func InternalServerError(err error) *Result {
 	return &Result{Ok: false, Code: http.StatusInternalServerError, Msg: err.Error()}
 }
@@ -99,7 +101,7 @@ func CheckQuery(r *http.Request, required, optional []string) *Result {
 }
 
 // name finds the name of the function f
-func name(f RequestHandler) string {
+func name(f interface{}) string {
 	var n string
 	// Find the name of the function f to use as the timer id
 	fn := runtime.FuncForPC(reflect.ValueOf(f).Pointer())
