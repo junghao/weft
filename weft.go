@@ -22,6 +22,7 @@ var (
 	MethodNotAllowed = Result{Ok: false, Code: http.StatusMethodNotAllowed, Msg: "method not allowed"}
 	NotFound         = Result{Ok: false, Code: http.StatusNotFound, Msg: "not found"}
 	NotAcceptable    = Result{Ok: false, Code: http.StatusNotAcceptable, Msg: "specify accept"}
+	Unauthorized     = Result{Ok: false, Code: http.StatusUnauthorized, Msg: "Access denied"}
 )
 
 type Result struct {
