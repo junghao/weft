@@ -57,7 +57,7 @@ const (
 	`
 	err400 = `<html>
 	<head>
-	<title>GeoNet - 404</title>
+	<title>GeoNet - 400</title>
 	<style>
 	body
 	{
@@ -107,7 +107,7 @@ const (
 
 	err405 = `<html>
 	<head>
-	<title>GeoNet - 404</title>
+	<title>GeoNet - 405</title>
 	<style>
 	body
 	{
