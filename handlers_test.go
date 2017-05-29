@@ -220,22 +220,17 @@ func TestWrite(t *testing.T) {
 }
 
 /*
-Before and after benchmarks for adding bytes.Buffer pool. Also compare passing nil &bytes.Buffer
-for non GET requests in MakeHandlerAPI.  Faster, fewer allocations (less work for the garbage collector).
+Before and after benchmarks for adding bytes.Buffer pool.
 
 Before:
 
     geoffc@hutl15403:~/src/github.com/GeoNet/weft$ go test -bench=. -benchmem
     BenchmarkMakeHandlerPage-4            300000              4181 ns/op            1424 B/op         11 allocs/op
-    BenchmarkMakeHandlerAPIGet-4          300000              4224 ns/op            1424 B/op         11 allocs/op
-    BenchmarkMakeHandlerAPIPut-4         1000000              1022 ns/op             560 B/op          5 allocs/op
 
 After:
 
     geoffc@hutl15403:~/src/github.com/GeoNet/weft$ go test -bench=. -benchmem
     BenchmarkMakeHandlerPage-4            500000              3268 ns/op             800 B/op          8 allocs/op
-    BenchmarkMakeHandlerAPIGet-4          500000              3279 ns/op             800 B/op          8 allocs/op
-    BenchmarkMakeHandlerAPIPut-4         2000000               998 ns/op             560 B/op          5 allocs/op
 */
 func BenchmarkMakeHandlerPage(b *testing.B) {
 	var w *httptest.ResponseRecorder
@@ -259,105 +254,6 @@ func BenchmarkMakeHandlerPage(b *testing.B) {
 	}
 
 	fm := MakeHandlerPage(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
-func BenchmarkMakeHandlerAPIGet(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("GET", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, b *bytes.Buffer) *Result {
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-		b.WriteString("bogan impsum bogan impsum")
-
-		return &StatusOK
-	}
-
-	fm := MakeHandlerAPI(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
-func BenchmarkMakeStreamHandlerAPIGet(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("GET", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, w http.ResponseWriter) *Result {
-		boganImpsum := []byte("bogan impsum bogan impsum")
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-
-		return &StatusOK
-	}
-
-	fm := MakeStreamHandlerAPI(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
-func BenchmarkMakeHandlerAPIPut(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("PUT", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, b *bytes.Buffer) *Result {
-		return &StatusOK
-	}
-
-	fm := MakeHandlerAPI(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
-func BenchmarkMakeStreamHandlerAPIPut(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("PUT", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, w http.ResponseWriter) *Result {
-		return &StatusOK
-	}
-
-	fm := MakeStreamHandlerAPI(h)
 
 	for n := 0; n < b.N; n++ {
 		w = httptest.NewRecorder()
