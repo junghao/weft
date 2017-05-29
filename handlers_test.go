@@ -295,36 +295,6 @@ func BenchmarkMakeHandlerAPIGet(b *testing.B) {
 	}
 }
 
-func BenchmarkMakeStreamHandlerAPIGet(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("GET", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, w http.ResponseWriter) *Result {
-		boganImpsum := []byte("bogan impsum bogan impsum")
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-		w.Write(boganImpsum)
-
-		return &StatusOK
-	}
-
-	fm := MakeStreamHandlerAPI(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
 func BenchmarkMakeHandlerAPIPut(b *testing.B) {
 	var w *httptest.ResponseRecorder
 
@@ -338,26 +308,6 @@ func BenchmarkMakeHandlerAPIPut(b *testing.B) {
 	}
 
 	fm := MakeHandlerAPI(h)
-
-	for n := 0; n < b.N; n++ {
-		w = httptest.NewRecorder()
-		fm.ServeHTTP(w, r)
-	}
-}
-
-func BenchmarkMakeStreamHandlerAPIPut(b *testing.B) {
-	var w *httptest.ResponseRecorder
-
-	r, err := http.NewRequest("PUT", "http://test.com", nil)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	h := func(r *http.Request, h http.Header, w http.ResponseWriter) *Result {
-		return &StatusOK
-	}
-
-	fm := MakeStreamHandlerAPI(h)
 
 	for n := 0; n < b.N; n++ {
 		w = httptest.NewRecorder()
