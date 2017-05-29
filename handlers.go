@@ -95,9 +95,7 @@ func MakeHandlerPage(f RequestHandler) http.HandlerFunc {
 }
 
 /*
-MakeHandlerAPI executes f.  A non nil bytes.Buffer is only
-passed to f for GET requests. For GET request the response in
-b is written to the client with gzipping.
+MakeHandlerAPI executes f.
 
 When res.Code is not http.StatusOK the contents of res.Msg are written to w.
 
@@ -108,20 +106,13 @@ func MakeHandlerAPI(f RequestHandler) http.HandlerFunc {
 		t := mtrapp.Start()
 		var res *Result
 
-		switch r.Method {
-		case "GET":
-			b := bufferPool.Get().(*bytes.Buffer)
-			defer bufferPool.Put(b)
-			b.Reset()
+		b := bufferPool.Get().(*bytes.Buffer)
+		defer bufferPool.Put(b)
+		b.Reset()
 
-			res = f(r, w.Header(), b)
-			t.Stop()
-			WriteBytes(w, r, res, b, false)
-		default:
-			res = f(r, w.Header(), nil)
-			t.Stop()
-			Write(w, r, res)
-		}
+		res = f(r, w.Header(), b)
+		t.Stop()
+		WriteBytes(w, r, res, b, false)
 
 		t.Track(name(f) + "." + r.Method)
 		res.Count()
